@@ -1,0 +1,204 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body with Night Sky Background */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(ellipse at bottom, #0b1d2a 0%, #000000 100%);
+  color: #ffffff;
+  height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  padding: 40px 20px;
+}
+
+/* Moon Styling */
+.moon {
+  width: 100px;
+  height: 100px;
+  background: #fffbe6;
+  border-radius: 50%;
+  position: absolute;
+  top: 30px;
+  right: -120px;
+  box-shadow:
+    0 0 40px #fffbe6,
+    0 0 80px #fffbe6,
+    0 0 120px #fffbe6;
+  animation: moonTwinkle 4s infinite ease-in-out;
+}
+
+/* Moon Glow Animation */
+@keyframes moonTwinkle {
+  0%, 100% {
+    box-shadow:
+      0 0 30px #fffbe6,
+      0 0 60px #fffbe6,
+      0 0 90px #fffbe6;
+  }
+  50% {
+    box-shadow:
+      0 0 50px #fffbe6,
+      0 0 100px #fffbe6,
+      0 0 140px #fffbe6;
+  }
+}
+
+/* Star Sparkles */
+.stars::before,
+.stars::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  box-shadow:
+    50px 100px white,
+    120px 250px white,
+    250px 300px white,
+    400px 180px white,
+    580px 100px white,
+    700px 400px white,
+    90px 350px white,
+    600px 250px white,
+    200px 90px white,
+    340px 160px white;
+  animation: starTwinkle 2s infinite ease-in-out alternate;
+}
+
+@keyframes starTwinkle {
+  0% { opacity: 0.3; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Glassmorphic Form Container */
+.container {
+  max-width: 700px;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+  animation: fadeIn 2s ease-out;
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+  color: #e0f7fa;
+  margin-bottom: 20px;
+}
+
+/* Labels & Inputs */
+form label {
+  display: block;
+  margin-bottom: 15px;
+  color: #c0d9ff;
+  font-size: 1em;
+}
+
+input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid #86a8e7;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  margin-top: 6px;
+  transition: 0.3s;
+}
+
+input::placeholder {
+  color: #b0c4de;
+}
+
+input:focus {
+  outline: none;
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Button Styling */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 1.2em;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #2980b9, #6dd5fa);
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 10px #6dd5fa;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px #6dd5fa;
+}
+
+/* Output Container */
+.output-container {
+  margin-top: 30px;
+}
+
+.output-container h3 {
+  text-align: center;
+  font-size: 1.5em;
+  color: #b2ebf2;
+  margin-bottom: 20px;
+}
+
+/* Customer Card Style */
+.customer-card {
+  background: rgba(255, 255, 255, 0.07);
+  border-left: 4px solid #6dd5fa;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  color: #e3f2fd;
+  transition: 0.3s;
+}
+
+.customer-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px #6dd5fa66;
+}
+
+/* Fade-in animation for the form */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive for small devices */
+@media (max-width: 600px) {
+  .moon {
+    top: 30px;
+    right: 10px;
+    width: 70px;
+    height: 70px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .container {
+    padding: 20px;
+  }
+}

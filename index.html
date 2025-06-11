@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Form</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Customer Form</h1>
+    <form onsubmit="showDetails(event)">
+      <label>Name: <input type="text" id="name" placeholder="Enter your full name" /></label><br />
+      <label>Age: <input type="number" id="age" placeholder="Enter your age" /></label><br />
+      <label>Date of Birth: <input type="date" id="dob" /></label><br />
+      <label>Gender: <input type="text" id="gen" placeholder="Enter your gender" /></label><br />
+      <label>Phone number: <input type="number" id="ph" placeholder="Enter your phone number" /></label><br />
+      <label>Email: <input type="email" id="mail" placeholder="Enter your email" /></label><br />
+      <button type="submit">Show Details</button>
+      <div class="moon"></div>
+      <div class="stars"></div>
+    </form>
+
+    <div class="output-container">
+      <h3>Customer Details:</h3>
+      <div id="output"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
