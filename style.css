@@ -4,115 +4,224 @@
   box-sizing: border-box;
 }
 
-/* Body with Night Sky Background */
+/* Body with Dynamic Night Sky Background */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: radial-gradient(ellipse at bottom, #0b1d2a 0%, #000000 100%);
+  background: radial-gradient(ellipse at bottom, #0b1d2a 0%, #000814 50%, #000000 100%);
   color: #ffffff;
-  height: 100vh;
+  min-height: 100vh;
   overflow-x: hidden;
   position: relative;
   padding: 40px 20px;
 }
 
-/* Moon Styling */
+/* Enhanced Moon with Craters and Floating Animation */
 .moon {
-  width: 100px;
-  height: 100px;
-  background: #fffbe6;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #fffbe6 0%, #f5f5dc 100%);
   border-radius: 50%;
-  position: absolute;
-  top: 30px;
-  right: -120px;
+  position: fixed;
+  top: 10px;
+  right: 20px;
   box-shadow:
-    0 0 40px #fffbe6,
-    0 0 80px #fffbe6,
-    0 0 120px #fffbe6;
-  animation: moonTwinkle 4s infinite ease-in-out;
+    0 0 40px rgba(255, 251, 230, 0.8),
+    0 0 80px rgba(255, 251, 230, 0.4),
+    0 0 120px rgba(255, 251, 230, 0.2);
+  animation: moonFloat 8s infinite ease-in-out;
+  z-index: 1;
 }
 
-/* Moon Glow Animation */
-@keyframes moonTwinkle {
+.moon::before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: rgba(200, 200, 200, 0.3);
+  border-radius: 50%;
+  top: 25px;
+  left: 30px;
+  box-shadow: 
+    25px 10px 0 -2px rgba(200, 200, 200, 0.2),
+    10px 35px 0 -5px rgba(200, 200, 200, 0.15);
+}
+
+@keyframes moonFloat {
   0%, 100% {
+    transform: translateY(0px) rotate(0deg);
     box-shadow:
-      0 0 30px #fffbe6,
-      0 0 60px #fffbe6,
-      0 0 90px #fffbe6;
+      0 0 40px rgba(255, 251, 230, 0.8),
+      0 0 80px rgba(255, 251, 230, 0.4),
+      0 0 120px rgba(255, 251, 230, 0.2);
   }
   50% {
+    transform: translateY(-15px) rotate(2deg);
     box-shadow:
-      0 0 50px #fffbe6,
-      0 0 100px #fffbe6,
-      0 0 140px #fffbe6;
+      0 0 60px rgba(255, 251, 230, 1),
+      0 0 120px rgba(255, 251, 230, 0.6),
+      0 0 180px rgba(255, 251, 230, 0.3);
   }
 }
 
-/* Star Sparkles */
-.stars::before,
+/* Enhanced Moving Stars with Multiple Layers */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.stars::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+    radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+    radial-gradient(2px 2px at 160px 30px, #fff, transparent),
+    radial-gradient(1px 1px at 200px 90px, #fff, transparent),
+    radial-gradient(2px 2px at 240px 50px, #fff, transparent),
+    radial-gradient(1px 1px at 280px 120px, #fff, transparent),
+    radial-gradient(2px 2px at 320px 80px, #fff, transparent),
+    radial-gradient(1px 1px at 360px 40px, #fff, transparent);
+  background-repeat: repeat;
+  background-size: 400px 200px;
+  animation: moveStars 60s linear infinite;
+}
+
 .stars::after {
   content: "";
   position: absolute;
-  width: 2px;
-  height: 2px;
-  background: white;
-  box-shadow:
-    50px 100px white,
-    120px 250px white,
-    250px 300px white,
-    400px 180px white,
-    580px 100px white,
-    700px 400px white,
-    90px 350px white,
-    600px 250px white,
-    200px 90px white,
-    340px 160px white;
-  animation: starTwinkle 2s infinite ease-in-out alternate;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(1px 1px at 50px 100px, #87ceeb, transparent),
+    radial-gradient(2px 2px at 150px 150px, #ffd700, transparent),
+    radial-gradient(1px 1px at 250px 200px, #ff69b4, transparent),
+    radial-gradient(2px 2px at 350px 50px, #98fb98, transparent),
+    radial-gradient(1px 1px at 450px 180px, #dda0dd, transparent),
+    radial-gradient(2px 2px at 550px 120px, #f0e68c, transparent),
+    radial-gradient(1px 1px at 650px 80px, #ffb6c1, transparent),
+    radial-gradient(2px 2px at 750px 220px, #87ceeb, transparent);
+  background-repeat: repeat;
+  background-size: 800px 400px;
+  animation: moveStars 40s linear infinite reverse, twinkleColors 3s infinite ease-in-out;
 }
 
-@keyframes starTwinkle {
-  0% { opacity: 0.3; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1.2); }
+@keyframes moveStars {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-400px); }
+}
+
+@keyframes twinkleColors {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Floating rocket using CSS-only */
+body::before {
+  content: "🚀";
+  position: fixed;
+  top: 30%;
+  left: -60px;
+  font-size: 3rem;
+  z-index: 2;
+  animation: astronautFloat 25s infinite linear;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+@keyframes astronautFloat {
+  0% {
+    transform: translateX(-60px) translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateX(calc(100vw / 4)) translateY(-20px) rotate(5deg);
+  }
+  50% {
+    transform: translateX(calc(100vw / 2)) translateY(10px) rotate(-3deg);
+  }
+  75% {
+    transform: translateX(calc(100vw * 3 / 4)) translateY(-15px) rotate(2deg);
+  }
+  100% {
+    transform: translateX(calc(100vw + 60px)) translateY(0px) rotate(0deg);
+  }
 }
 
 /* Glassmorphic Form Container */
 .container {
   max-width: 700px;
   margin: auto;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  padding: 30px;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
-  animation: fadeIn 2s ease-out;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 40px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 
+    0 0 30px rgba(255, 255, 255, 0.1),
+    inset 0 0 30px rgba(255, 255, 255, 0.02);
+  animation: fadeIn 2s ease-out, containerGlow 4s infinite ease-in-out;
+  position: relative;
+  z-index: 3;
 }
 
-/* Title */
+@keyframes containerGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(255, 255, 255, 0.1),
+      inset 0 0 30px rgba(255, 255, 255, 0.02);
+  }
+  50% {
+    box-shadow: 
+      0 0 50px rgba(135, 206, 235, 0.3),
+      inset 0 0 50px rgba(135, 206, 235, 0.05);
+  }
+}
+
+/* Enhanced Title with Glow */
 h1 {
   text-align: center;
-  font-size: 2.5em;
-  color: #e0f7fa;
-  margin-bottom: 20px;
+  font-size: 3em;
+  background: linear-gradient(45deg, #e0f7fa, #87ceeb, #ffd700);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 30px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  animation: titleGlow 3s infinite ease-in-out;
 }
 
-/* Labels & Inputs */
+@keyframes titleGlow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+
+/* Enhanced Labels & Inputs */
 form label {
   display: block;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   color: #c0d9ff;
-  font-size: 1em;
+  font-size: 1.1em;
+  font-weight: 500;
 }
 
 input {
   width: 100%;
-  padding: 12px 16px;
-  border-radius: 12px;
-  border: 1px solid #86a8e7;
+  padding: 15px 20px;
+  border-radius: 15px;
+  border: 2px solid rgba(135, 206, 235, 0.3);
   background: rgba(255, 255, 255, 0.1);
   color: white;
-  margin-top: 6px;
-  transition: 0.3s;
+  margin-top: 8px;
+  transition: all 0.4s ease;
+  font-size: 1rem;
 }
 
 input::placeholder {
@@ -121,63 +230,103 @@ input::placeholder {
 
 input:focus {
   outline: none;
-  border-color: #ffffff;
+  border-color: #87ceeb;
   background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(135, 206, 235, 0.4);
+  transform: translateY(-2px);
 }
 
-/* Button Styling */
+/* Enhanced Button with Cosmic Animation */
 button {
   width: 100%;
-  padding: 12px;
-  margin-top: 20px;
-  font-size: 1.2em;
-  border-radius: 14px;
-  background: linear-gradient(90deg, #2980b9, #6dd5fa);
-  color: white;
+  padding: 18px;
+  margin-top: 30px;
+  font-size: 1.3em;
+  font-weight: bold;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff);
+  color: #000;
   border: none;
   cursor: pointer;
-  box-shadow: 0 0 10px #6dd5fa;
+  box-shadow: 0 0 20px rgba(109, 213, 250, 0.6);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s ease;
 }
 
 button:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 20px #6dd5fa;
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 0 40px rgba(109, 213, 250, 0.8);
+}
+
+button:hover::before {
+  left: 100%;
 }
 
 /* Output Container */
 .output-container {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .output-container h3 {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.8em;
   color: #b2ebf2;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  text-shadow: 0 0 15px rgba(178, 235, 242, 0.5);
 }
 
-/* Customer Card Style */
+/* Enhanced Customer Card */
 .customer-card {
-  background: rgba(255, 255, 255, 0.07);
-  border-left: 4px solid #6dd5fa;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-left: 5px solid #6dd5fa;
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 25px;
   color: #e3f2fd;
-  transition: 0.3s;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.customer-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(109, 213, 250, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
 }
 
 .customer-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 10px #6dd5fa66;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(109, 213, 250, 0.3);
+  border-left-color: #87ceeb;
 }
 
-/* Fade-in animation for the form */
+.customer-card:hover::before {
+  transform: translateX(100%);
+}
+
+/* Fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -185,20 +334,55 @@ button:hover {
   }
 }
 
-/* Responsive for small devices */
-@media (max-width: 600px) {
+/* Responsive Design */
+@media (max-width: 768px) {
   .moon {
     top: 30px;
-    right: 10px;
-    width: 70px;
-    height: 70px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
   }
 
   h1 {
-    font-size: 2em;
+    font-size: 2.2em;
+  }
+
+  .container {
+    padding: 25px;
+    margin: 20px 10px;
+  }
+
+  body::before {
+    font-size: 2rem;
+  }
+
+  body::after {
+    font-size: 1rem;
+    word-spacing: 3rem;
+    line-height: 6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .moon {
+    width: 60px;
+    height: 60px;
+  }
+
+  h1 {
+    font-size: 1.8em;
   }
 
   .container {
     padding: 20px;
+  }
+
+  input {
+    padding: 12px 16px;
+  }
+
+  button {
+    padding: 15px;
+    font-size: 1.1em;
   }
 }
